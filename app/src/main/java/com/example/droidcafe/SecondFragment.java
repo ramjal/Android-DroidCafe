@@ -16,20 +16,8 @@ public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        Bundle bundle = this.getArguments();
-//        if (bundle != null) {
-//            String extraMessage = bundle.getString(FirstFragment.EXTRA_MESSAGE, "");
-//        }
-//    }
-
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }

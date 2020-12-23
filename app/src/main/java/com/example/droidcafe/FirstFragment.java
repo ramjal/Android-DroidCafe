@@ -33,22 +33,6 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        binding.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!"".equals(mOrderMessage)) {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString(EXTRA_MESSAGE, mOrderMessage);
-//                    NavHostFragment.findNavController(FirstFragment.this)
-//                            .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
-//                } else {
-//                    NavHostFragment.findNavController(FirstFragment.this)
-//                            .navigate(R.id.action_FirstFragment_to_SecondFragment);
-//
-//                }
-//            }
-//        });
-
         binding.fab.setOnClickListener(this);
         binding.donut.setOnClickListener(this);
         binding.icecream.setOnClickListener(this);
