@@ -1,7 +1,12 @@
 package com.example.droidcafe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -40,13 +45,59 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        binding.imageContextMenu.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext(), "Long pressed OK!", Toast.LENGTH_SHORT).show();
+        registerForContextMenu(binding.imageContextMenu);
+    }
+
+    @Override
+    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.context_edit:
+                displayToast("Edit choice clicked.");
                 return true;
-            }
-        });
+            case R.id.context_share:
+                displayToast("Share choice clicked.");
+                return true;
+            case R.id.context_delete:
+                //displayToast("Delete choice clicked.");
+                handleDelete();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+    private void displayToast(String message) {
+        Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void handleDelete() {
+        AlertDialog.Builder myAlterDialog = new AlertDialog.Builder(getActivity());
+        myAlterDialog.setTitle("Alert");
+        myAlterDialog.setMessage("Click OK to continue, or Cancel to stop deleting this image.");
+
+        // Add the dialog buttons.
+        myAlterDialog.setPositiveButton("OK", new
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        displayToast("Pressed OK");
+                    }
+                });
+        myAlterDialog.setNegativeButton("Cancel", new
+                DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        displayToast("Pressed Cancel");
+                    }
+                });
+
+        // Create and show the AlertDialog.
+        myAlterDialog.show();
     }
 
     @Override
