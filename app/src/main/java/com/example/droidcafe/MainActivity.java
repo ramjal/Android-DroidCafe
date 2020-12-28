@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.action_order:
                 displayToast(getString(R.string.action_order_message));
+                Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
+                    .navigate(R.id.action_FirstFragment_to_SecondFragment);
                 return true;
             case R.id.action_status:
                 displayToast(getString(R.string.action_status_message));
