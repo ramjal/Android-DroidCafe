@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
                 || super.onSupportNavigateUp();
     }
 
+    //From DatePickerFragment.NoticeDialogListener
     @Override
     public void onDateSetEvent(int year, int month, int day) {
         String month_string = Integer.toString(month+1);
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerFragmen
         displayToast("Date: " + dateMessage);
     }
 
-    public void onTimeSetEvent(int hour, int minute) {
+    public void timePickerIsSet(int hour, int minute) {
         String hour_string = Integer.toString(hour);
         String minute_string = Integer.toString(minute);
         String dateMessage = (hour_string + ":" + minute_string);
