@@ -23,7 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerFragment.NoticeDialogListener {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
@@ -84,6 +84,22 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void onDateSetEvent(int year, int month, int day) {
+        String month_string = Integer.toString(month+1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+        displayToast("Date: " + dateMessage);
+    }
+
+    public void onTimeSetEvent(int hour, int minute) {
+        String hour_string = Integer.toString(hour);
+        String minute_string = Integer.toString(minute);
+        String dateMessage = (hour_string + ":" + minute_string);
+        displayToast("Time is set to " + dateMessage);
     }
 
     public void displayToast(String message) {

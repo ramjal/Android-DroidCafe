@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.droidcafe.databinding.FragmentSecondBinding;
@@ -34,10 +36,13 @@ public class SecondFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             String extraMessage = bundle.getString(FirstFragment.EXTRA_MESSAGE, "");
-            binding.textviewSecond.setText(extraMessage);
+            binding.textviewOrder.setText(extraMessage);
         }
 
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+        //setup context menu for image
+        registerForContextMenu(binding.imageContextMenu);
+
+        binding.buttonPrevFragment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(SecondFragment.this)
@@ -45,7 +50,21 @@ public class SecondFragment extends Fragment {
             }
         });
 
-        registerForContextMenu(binding.imageContextMenu);
+        binding.buttonDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+            }
+        });
+
+        binding.buttonTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newFragment = new TimePickerFragment();
+                newFragment.show(getActivity().getSupportFragmentManager(), "timePicker");
+            }
+        });
     }
 
     @Override
@@ -74,7 +93,7 @@ public class SecondFragment extends Fragment {
     }
 
     private void displayToast(String message) {
-        Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     private void handleDelete() {
